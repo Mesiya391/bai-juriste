@@ -46,7 +46,7 @@
     import firebase from 'firebase';
     import db from '@/firebase/init';
     export default {
-        name : 'Add Case',
+        name : 'AddCase',
         data(){
             return{
                 name: null,
