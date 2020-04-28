@@ -6,6 +6,7 @@ import Login from "../components/auth/Login";
 import Cases from "../components/content/Cases";
 import Add from "../components/content/Add";
 import Tools from "../components/content/Tools";
+import AddCase from "../components/forms/AddCase";
 import firebase from "firebase";
 
 
@@ -51,6 +52,14 @@ const routes = [
     path: '/tools',
     name: 'Tools',
     component: Tools,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/add-case',
+    name: 'AddCase',
+    component: AddCase,
     meta: {
       requiresAuth: true
     }

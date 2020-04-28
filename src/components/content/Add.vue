@@ -1,11 +1,13 @@
 <template>
     <div>
-        <h2>TUTAJ BEDA LINKI DO FORMULARZY UMOZLIWIAJACYCH DODANIE CASE, TERMINU, EVENTU, PISMA, NOTATKI</h2>
+        <router-link :to="{ name : 'AddCase'}">Add Case</router-link>
     </div>
 </template>
 
 <script>
-
+    export default {
+        name: 'Add'
+    }
 </script>
 
 <style>

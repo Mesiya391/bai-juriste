@@ -13,7 +13,6 @@
             <div class="field">
                 <label for="alias">Alias</label>
                 <input type="text" name="alias" v-model="alias">
-
             </div>
             <p class="red-text center" v-if="feedback">{{feedback}}</p>
             <div class="field center">
