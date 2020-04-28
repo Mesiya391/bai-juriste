@@ -44,6 +44,7 @@
 
 <script>
     import firebase from 'firebase';
+    import db from '@/firebase/init';
     export default {
         name : 'Add Case',
         data(){
@@ -62,8 +63,21 @@
         methods: {
             createCase(){
                 if(this.name && this.client && this.clientAddress && this.party && this.partyAddress && this.court && this.wps && this.attorney){
-                    let firestore = firebase.firestore()
-
+                    let user = firebase.auth().currentUser;
+                    let userID = user.uid
+                    db.collection('cases').doc(userID).collection('userCases').doc(this.name).set({
+                        name: this.name,
+                        client: this.client,
+                        clientAddress: this.clientAddress,
+                        party: this.party,
+                        partyAddress: this.partyAddress,
+                        court: this.court,
+                        wps: this.wps,
+                        attorney: this.attorney,
+                    })
+                    .then(() => {
+                        this.feedback = 'Case successfully added';
+                    })
                 }else{
                     this.feedback = 'Please fill in all fields'
                 }
