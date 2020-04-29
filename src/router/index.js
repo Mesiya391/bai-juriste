@@ -8,6 +8,8 @@ import Add from "../components/content/Add";
 import Tools from "../components/content/Tools";
 import AddCase from "../components/forms/AddCase";
 import AddPleading from "../components/forms/AddPleading";
+import AddNote from "../components/forms/AddNote";
+import AddTerm from "../components/forms/AddTerm";
 import firebase from "firebase";
 
 
@@ -69,6 +71,22 @@ const routes = [
     path: '/add-pleading',
     name: 'AddPleading',
     component: AddPleading,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/add-note',
+    name: 'AddNote',
+    component: AddNote,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/add-term',
+    name: 'AddTerm',
+    component: AddTerm,
     meta: {
       requiresAuth: true
     }
