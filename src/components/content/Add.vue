@@ -4,6 +4,7 @@
         <router-link :to="{ name : 'AddPleading'}">Add Pleading</router-link>
         <router-link :to="{ name : 'AddNote'}">Add Note</router-link>
         <router-link :to="{ name : 'AddTerm'}">Add Term</router-link>
+        <router-link :to="{ name : 'AddProceeding'}">Add Proceeding</router-link>
     </div>
 </template>
 
