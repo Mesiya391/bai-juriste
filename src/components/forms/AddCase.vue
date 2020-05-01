@@ -34,6 +34,10 @@
                 <label for="attorney">Pełnomocnik strony przeciwnej</label>
                 <input type="text" name="attorney" v-model="attorney">
             </div>
+            <div class="field">
+                <label for="caseID">Sygnatura sprawy</label>
+                <input type="text" name="caseID" v-model="caseID">
+            </div>
             <p class="red-text center" v-if="feedback">{{feedback}}</p>
             <div class="field center">
                 <button class="btn deep-purple">Stwórz sprawę</button>
@@ -57,6 +61,7 @@
                 court: null,
                 wps: null,
                 attorney: null,
+                caseID: null,
                 feedback: null
             }
         },
@@ -74,6 +79,7 @@
                         court: this.court,
                         wps: this.wps,
                         attorney: this.attorney,
+                        caseID: this.caseID
                     })
                     .then(() => {
                         this.feedback = 'Case successfully added';

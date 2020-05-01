@@ -178,6 +178,7 @@
                                 caseInfo.partyAddress = data.partyAddress;
                                 caseInfo.court = data.court;
                                 caseInfo.clientAddress = data.clientAddress;
+                                caseInfo.caseID = data.caseID
                             }
                             console.log(caseInfo);
                         });
