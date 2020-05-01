@@ -31,7 +31,7 @@
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
                 <tr>
-                    <th v-for="col in termsColumns" v-bind:key="col" @click="termSortTable(col)"> {{ col }} </th>
+                    <th v-for="col in termsColumns" v-bind:key="col" @click="termSortTable(col, termsRows)"> {{ col }} </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
                 <tr>
-                    <th v-for="col in proceedingsColumnNames" v-bind:key="col">{{ col }}</th>
+                    <th v-for="col in proceedingsColumns" v-bind:key="col" @click="termSortTable(col, proceedingsRows)">{{ col }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -150,10 +150,10 @@
                             // doc.data() is never undefined for query doc snapshots
                             let data = doc.data()
                             proceedingsRows.push({
-                                date: data.date,
-                                name: data.name,
-                                city: data.city,
-                                note: data.note
+                                "Data": data.date,
+                                "Nazwa": data.name,
+                                "Miasto": data.city,
+                                "Notatka": data.note
                             })
                             console.log("");
                         });
@@ -263,9 +263,9 @@
                     this.caseInfo[property] = "";
                 }
             },
-            termSortTable: function(col) {
+            termSortTable: function(col, rows) {
                 if(this.tableSorted) {
-                    this.termsRows.sort(function (a, b) {
+                    rows.sort(function (a, b) {
                         if (a[col] > b[col]) {
                             return 1;
                         } else if (a[col] < b[col]) {
@@ -275,7 +275,7 @@
                     })
                     this.tableSorted = false;
                 }else{
-                    this.termsRows.sort(function (a, b) {
+                    rows.sort(function (a, b) {
                         if (a[col] < b[col]) {
                             return 1;
                         } else if (a[col] > b[col]) {
