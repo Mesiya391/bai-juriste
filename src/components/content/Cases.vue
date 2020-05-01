@@ -113,10 +113,6 @@
                 proceedingsRows: [],
                 pleadingsRows: [],
                 notesRows: [],
-                termsColumnNames: ["Data", "Od", "Do", "Nazwa", "Miasto", "Notatka"],
-                proceedingsColumnNames: ["Data", "Nazwa", "Miasto", "Notatka"],
-                pleadingsColumnNames: ["Data", "Nazwa","Notatka"],
-                notesColumnNames: ["Data", "Nazwa", "Notatka"],
                 showElements: false,
                 tableSorted: false
             }
