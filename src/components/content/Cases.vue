@@ -61,7 +61,7 @@
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
                 <tr>
-                    <th v-for="col in pleadingsColumnNames" v-bind:key="col">{{ col }}</th>
+                    <th v-for="col in pleadingsColumns" v-bind:key="col" @click="termSortTable(col, pleadingsRows)">{{ col }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -76,7 +76,7 @@
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
                 <tr>
-                    <th v-for="col in notesColumnNames" v-bind:key="col">{{ col }}</th>
+                    <th v-for="col in notesColumns" v-bind:key="col" @click="termSortTable(col, notesRows)">{{ col }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -198,9 +198,9 @@
                             // doc.data() is never undefined for query doc snapshots
                             let data = doc.data()
                             notesRows.push({
-                                date: data.date,
-                                name: data.name,
-                                note: data.note
+                                "Data": data.date,
+                                "Nazwa": data.name,
+                                "Notatka": data.note
                             })
                             console.log("");
                         });
@@ -219,9 +219,9 @@
                             // doc.data() is never undefined for query doc snapshots
                             let data = doc.data()
                             pleadingsRows.push({
-                                date: data.date,
-                                name: data.name,
-                                note: data.note
+                                "Data": data.date,
+                                "Nazwa": data.name,
+                                "Notatka": data.note
                             })
                             console.log("");
                         });
