@@ -25,6 +25,25 @@
             <p v-if="showElements">Adres: {{ caseInfo.partyAddress }}</p>
             <p v-if="showElements">Pełnomocnik: {{ caseInfo.attorney }}</p>
         </div>
+        <div>
+            <h3 v-if="showElements">Pisma procesowe</h3>
+            <table class="centered highlight responsive-table" v-if="showElements">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Note</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td v-for="item in pleadings.dates" v-bind:key="item">{{ item }}</td>
+                    <td v-for="item in pleadings.names" v-bind:key="item">{{ item }}</td>
+                    <td v-for="item in pleadings.notes" v-bind:key="item">{{ item }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
