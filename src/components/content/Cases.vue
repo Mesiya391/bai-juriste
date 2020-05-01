@@ -25,7 +25,43 @@
             <p v-if="showElements">Adres: {{ caseInfo.partyAddress }}</p>
             <p v-if="showElements">Pełnomocnik: {{ caseInfo.attorney }}</p>
         </div>
-        <div>
+        <div class="table container">
+            <h3 v-if="showElements">Terminy</h3>
+            <table class="centered highlight responsive-table" v-if="showElements">
+                <thead>
+                <tr>
+                    <th v-for="col in columns" v-bind:key="col">{{ col }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="row in termsRows" v-bind:key="row">
+                    <td v-for="column in columns" v-bind:key="column">{{row[column]}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table container">
+            <h3 v-if="showElements">Wydarzenia</h3>
+            <table class="centered highlight responsive-table" v-if="showElements">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Note</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td v-for="item in proceedings.dates" v-bind:key="item">{{ item }}</td>
+                    <td v-for="item in proceedings.names" v-bind:key="item">{{ item }}</td>
+                    <td v-for="item in proceedings.cities" v-bind:key="item">{{ item }}</td>
+                    <td v-for="item in proceedings.notes" v-bind:key="item">{{ item }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table container">
             <h3 v-if="showElements">Pisma procesowe</h3>
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
@@ -40,6 +76,23 @@
                     <td v-for="item in pleadings.dates" v-bind:key="item">{{ item }}</td>
                     <td v-for="item in pleadings.names" v-bind:key="item">{{ item }}</td>
                     <td v-for="item in pleadings.notes" v-bind:key="item">{{ item }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table container">
+            <h3 v-if="showElements">Notatki</h3>
+            <table class="centered highlight responsive-table" v-if="showElements">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Note</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td v-for="item in notes.dates" v-bind:key="item">{{ item }}</td>
+                    <td v-for="item in notes.notes" v-bind:key="item">{{ item }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -91,6 +144,7 @@
                     cities: [],
                     notes: []
                 },
+                termsRows: [],
                 showElements: false
             }
         },
@@ -198,6 +252,7 @@
                 let userID = user.uid;
                 let selectedCase = this.selectedCase;
                 let terms = this.terms;
+                let termsRows = this.termsRows;
                 db.collection('cases').doc(userID).collection('userCases').doc(selectedCase)
                     .collection('Terms')
                     .get()
@@ -205,6 +260,7 @@
                         querySnapshot.forEach(function(doc) {
                             // doc.data() is never undefined for query doc snapshots
                             let data = doc.data()
+                            termsRows.push(data)
                             terms.names.push(data.name)
                             terms.dates.push(data.date)
                             terms.startTimes.push(data.startTime)
@@ -235,8 +291,12 @@
                 }
             }
         },
-        computed: {
-
+        computed: { "columns": function columns() {
+                if (this.termsRows.length == 0) {
+                    return [];
+                }
+                return Object.keys(this.termsRows[0])
+            }
         },
         created: function() {
             let caseList = this.caseList
