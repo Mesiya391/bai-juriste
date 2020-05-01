@@ -30,12 +30,12 @@
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
                 <tr>
-                    <th v-for="col in columns" v-bind:key="col">{{ col }}</th>
+                    <th v-for="col in termsColumnNames" v-bind:key="col">{{ col }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="row in termsRows" v-bind:key="row">
-                    <td v-for="column in columns" v-bind:key="column">{{row[column]}}</td>
+                    <td v-for="column in termsColumns" v-bind:key="column">{{row[column]}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -45,18 +45,12 @@
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Name</th>
-                    <th>City</th>
-                    <th>Note</th>
+                    <th v-for="col in proceedingsColumnNames" v-bind:key="col">{{ col }}</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td v-for="item in proceedings.dates" v-bind:key="item">{{ item }}</td>
-                    <td v-for="item in proceedings.names" v-bind:key="item">{{ item }}</td>
-                    <td v-for="item in proceedings.cities" v-bind:key="item">{{ item }}</td>
-                    <td v-for="item in proceedings.notes" v-bind:key="item">{{ item }}</td>
+                <tr v-for="row in proceedingsRows" v-bind:key="row">
+                    <td v-for="column in proceedingsColumns" v-bind:key="column">{{row[column]}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -136,15 +130,10 @@
                     dates: [],
                     notes: []
                 },
-                terms: {
-                    names: [],
-                    dates: [],
-                    startTimes: [],
-                    endTimes: [],
-                    cities: [],
-                    notes: []
-                },
                 termsRows: [],
+                proceedingsRows: [],
+                termsColumnNames: ["Data", "Od", "Do", "Nazwa", "Miasto", "Notatka"],
+                proceedingsColumnNames: ["Data", "Nazwa", "Miasto", "Notatka"],
                 showElements: false
             }
         },
@@ -168,7 +157,7 @@
                 let user = firebase.auth().currentUser;
                 let userID = user.uid;
                 let selectedCase = this.selectedCase;
-                let proceedings = this.proceedings;
+                let proceedingsRows = this.proceedingsRows;
                 db.collection('cases').doc(userID).collection('userCases').doc(selectedCase)
                     .collection('Proceedings')
                     .get()
@@ -176,11 +165,13 @@
                         querySnapshot.forEach(function(doc) {
                             // doc.data() is never undefined for query doc snapshots
                             let data = doc.data()
-                            proceedings.names.push(data.name)
-                            proceedings.cities.push(data.city)
-                            proceedings.dates.push(data.date)
-                            proceedings.notes.push(data.note)
-                            console.log(proceedings.names);
+                            proceedingsRows.push({
+                                date: data.date,
+                                name: data.name,
+                                city: data.city,
+                                note: data.note
+                            })
+                            console.log("");
                         });
                     })
             },
@@ -251,7 +242,6 @@
                 let user = firebase.auth().currentUser;
                 let userID = user.uid;
                 let selectedCase = this.selectedCase;
-                let terms = this.terms;
                 let termsRows = this.termsRows;
                 db.collection('cases').doc(userID).collection('userCases').doc(selectedCase)
                     .collection('Terms')
@@ -260,14 +250,16 @@
                         querySnapshot.forEach(function(doc) {
                             // doc.data() is never undefined for query doc snapshots
                             let data = doc.data()
-                            termsRows.push(data)
-                            terms.names.push(data.name)
-                            terms.dates.push(data.date)
-                            terms.startTimes.push(data.startTime)
-                            terms.endTimes.push(data.endTime)
-                            terms.cities.push(data.city)
-                            terms.notes.push(data.note)
-                            console.log(terms.names);
+                            termsRows.push({
+                                date: data.date,
+                                startTime: data.startTime,
+                                endTime: data.endTime,
+                                name: data.name,
+                                city: data.city,
+                                note: data.note
+                            })
+
+                            console.log("");
                         });
                     })
             },
@@ -291,11 +283,18 @@
                 }
             }
         },
-        computed: { "columns": function columns() {
+        computed: {
+            "termsColumns": function columns() {
                 if (this.termsRows.length == 0) {
                     return [];
                 }
                 return Object.keys(this.termsRows[0])
+            },
+            "proceedingsColumns": function columns() {
+                if (this.proceedingsRows.length == 0) {
+                    return [];
+                }
+                return Object.keys(this.proceedingsRows[0])
             }
         },
         created: function() {
