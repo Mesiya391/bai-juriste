@@ -117,7 +117,8 @@
                 proceedingsColumnNames: ["Data", "Nazwa", "Miasto", "Notatka"],
                 pleadingsColumnNames: ["Data", "Nazwa","Notatka"],
                 notesColumnNames: ["Data", "Nazwa", "Notatka"],
-                showElements: false
+                showElements: false,
+                tableSorted: false
             }
         },
         mounted: function() {
@@ -239,12 +240,12 @@
                             // doc.data() is never undefined for query doc snapshots
                             let data = doc.data()
                             termsRows.push({
-                                date: data.date,
-                                startTime: data.startTime,
-                                endTime: data.endTime,
-                                name: data.name,
-                                city: data.city,
-                                note: data.note
+                                "Data": data.date,
+                                "Od": data.startTime,
+                                "Do": data.endTime,
+                                "Nazwa": data.name,
+                                "Miasto": data.city,
+                                "Notatka": data.note
                             })
 
                             console.log("");
@@ -263,14 +264,27 @@
                 }
             },
             termSortTable: function(col) {
-                this.termsRows.sort(function(a, b) {
-                    if (a[col] > b[col]) {
-                        return 1;
-                    } else if (a[col] < b[col]) {
-                        return  -1;
-                    }
-                    return 0;
-                })
+                if(this.tableSorted) {
+                    this.termsRows.sort(function (a, b) {
+                        if (a[col] > b[col]) {
+                            return 1;
+                        } else if (a[col] < b[col]) {
+                            return -1;
+                        }
+                        return 0;
+                    })
+                    this.tableSorted = false;
+                }else{
+                    this.termsRows.sort(function (a, b) {
+                        if (a[col] < b[col]) {
+                            return 1;
+                        } else if (a[col] > b[col]) {
+                            return -1;
+                        }
+                        return 0;
+                    })
+                    this.tableSorted = true;
+                }
             }
         },
         computed: {
