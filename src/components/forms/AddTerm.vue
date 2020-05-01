@@ -3,8 +3,11 @@
         <form class="card-panel">
             <h2 class="center deep-purple-text">Dodaj Termin</h2>
             <div class="field">
-                <label for="toCase">Nazwa sprawy</label>
-                <input type="text" name="toCase" v-model="toCase">
+                <label>Wybierz sprawę</label>
+                <select class="browser-default" v-model="toCase">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option v-for="item in caseList" :value="item" v-bind:key="item">{{item}}</option>
+                </select>
             </div>
             <div class="field">
                 <label for="termName">Nazwa Terminu</label>
@@ -76,6 +79,24 @@
                     this.feedback = 'Please fill in all fields'
                 }
             }
+        },
+        created: function() {
+            let caseList = this.caseList
+            let user = firebase.auth().currentUser;
+            let userID = user.uid
+            db.collection('cases').doc(userID).collection('userCases')
+                .get()
+                .then(function(querySnapshot) {
+                    querySnapshot.forEach(function(doc) {
+                        // doc.data() is never undefined for query doc snapshots
+                        caseList.push(doc.id)
+                        console.log(doc.id, " => ", doc.data(), caseList);
+                    });
+                })
+                .catch(function(error) {
+                    console.log("Error getting documents: ", error);
+                });
+
         }
     }
 </script>
