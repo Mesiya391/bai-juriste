@@ -13,6 +13,7 @@
             <p v-if="showElements">Nazwa sprawy: {{ caseInfo.name }} </p>
             <p v-if="showElements">Sąd: {{ caseInfo.court }}</p>
             <p v-if="showElements">Wartość przedmiotu sporu: {{ caseInfo.wps }}</p>
+            <p v-if="showElements">Sygnatura sprawy: {{ caseInfo.caseID }}</p>
         </div>
         <div class="container">
             <h3 v-if="showElements">Dane klienta: </h3>
@@ -30,7 +31,7 @@
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
                 <tr>
-                    <th v-for="col in termsColumnNames" v-bind:key="col">{{ col }}</th>
+                    <th v-for="col in termsColumnNames" v-bind:key="col" >{{ col }} </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -250,24 +251,16 @@
                     })
             },
             resetLists: function(){
-                for(const property in this.proceedings) {
-                    this.proceedings[property] = []
-                }
-                for(const property in this.notes) {
-                    this.notes[property] = []
-                }
-                for(const property in this.terms) {
-                    this.terms[property] = []
-                }
-                for(const property in this.pleadings) {
-                    this.pleadings[property] = []
-                }
+             this.proceedingsRows = [];
+             this.pleadingsRows = [];
+             this.notesRows = [];
+             this.termsRows = [];
             },
             resetCaseInfo: function(){
                 for(const property in this.caseInfo){
                     this.caseInfo[property] = "";
                 }
-            }
+            },
         },
         computed: {
             "termsColumns": function columns() {
