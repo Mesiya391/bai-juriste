@@ -11,6 +11,8 @@ import AddPleading from "../components/forms/AddPleading";
 import AddNote from "../components/forms/AddNote";
 import AddTerm from "../components/forms/AddTerm";
 import AddProceeding from "../components/forms/AddProceeding";
+import Delete from "../components/content/Delete";
+import DeleteCase from "../components/delete-forms/DeleteCase";
 import firebase from "firebase";
 
 
@@ -96,6 +98,22 @@ const routes = [
     path: '/add-proceeding',
     name: 'AddProceeding',
     component: AddProceeding,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/delete-case',
+    name: 'DeleteCase',
+    component: DeleteCase,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/delete',
+    name: 'Delete',
+    component: Delete,
     meta: {
       requiresAuth: true
     }
