@@ -60,16 +60,12 @@
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Name</th>
-                    <th>Note</th>
+                    <th v-for="col in pleadingsColumnNames" v-bind:key="col">{{ col }}</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td v-for="item in pleadings.dates" v-bind:key="item">{{ item }}</td>
-                    <td v-for="item in pleadings.names" v-bind:key="item">{{ item }}</td>
-                    <td v-for="item in pleadings.notes" v-bind:key="item">{{ item }}</td>
+                <tr v-for="row in pleadingsRows" v-bind:key="row">
+                    <td v-for="column in pleadingsColumns" v-bind:key="column">{{row[column]}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -125,15 +121,12 @@
                     dates: [],
                     notes: []
                 },
-                pleadings: {
-                    names: [],
-                    dates: [],
-                    notes: []
-                },
                 termsRows: [],
                 proceedingsRows: [],
+                pleadingsRows: [],
                 termsColumnNames: ["Data", "Od", "Do", "Nazwa", "Miasto", "Notatka"],
                 proceedingsColumnNames: ["Data", "Nazwa", "Miasto", "Notatka"],
+                pleadingsColumnNames: ["Data", "Nazwa","Notatka"],
                 showElements: false
             }
         },
@@ -223,7 +216,7 @@
                 let user = firebase.auth().currentUser;
                 let userID = user.uid;
                 let selectedCase = this.selectedCase;
-                let pleadings = this.pleadings;
+                let pleadingsRows = this.pleadingsRows;
                 db.collection('cases').doc(userID).collection('userCases').doc(selectedCase)
                     .collection('Pleadings')
                     .get()
@@ -231,10 +224,12 @@
                         querySnapshot.forEach(function(doc) {
                             // doc.data() is never undefined for query doc snapshots
                             let data = doc.data()
-                            pleadings.names.push(data.name)
-                            pleadings.dates.push(data.date)
-                            pleadings.notes.push(data.note)
-                            console.log(pleadings.names);
+                            pleadingsRows.push({
+                                date: data.date,
+                                name: data.name,
+                                note: data.note
+                            })
+                            console.log("");
                         });
                     })
             },
@@ -295,6 +290,12 @@
                     return [];
                 }
                 return Object.keys(this.proceedingsRows[0])
+            },
+            "pleadingsColumns": function columns() {
+                if (this.pleadingsRows.length == 0) {
+                    return [];
+                }
+                return Object.keys(this.pleadingsRows[0])
             }
         },
         created: function() {
