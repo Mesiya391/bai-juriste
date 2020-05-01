@@ -9,7 +9,7 @@
             <button @click="displayCaseInfo" class="btn deep-purple">Wybierz</button>
         </div>
         <div class="container">
-            <h3 v-if="showElements">Informacje ogólne: {{ caseInfo.name }}</h3>
+            <h3 v-if="showElements">Informacje ogólne:</h3>
             <p v-if="showElements">Nazwa sprawy: {{ caseInfo.name }} </p>
             <p v-if="showElements">Sąd: {{ caseInfo.court }}</p>
             <p v-if="showElements">Wartość przedmiotu sporu: {{ caseInfo.wps }}</p>
@@ -31,7 +31,7 @@
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
                 <tr>
-                    <th v-for="col in termsColumnNames" v-bind:key="col" >{{ col }} </th>
+                    <th v-for="col in termsColumns" v-bind:key="col" @click="termSortTable(col)"> {{ col }} </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -262,6 +262,16 @@
                     this.caseInfo[property] = "";
                 }
             },
+            termSortTable: function(col) {
+                this.termsRows.sort(function(a, b) {
+                    if (a[col] > b[col]) {
+                        return 1;
+                    } else if (a[col] < b[col]) {
+                        return  -1;
+                    }
+                    return 0;
+                })
+            }
         },
         computed: {
             "termsColumns": function columns() {
@@ -287,7 +297,7 @@
                     return [];
                 }
                 return Object.keys(this.notesRows[0])
-            }
+            },
         },
         created: function() {
             let caseList = this.caseList
