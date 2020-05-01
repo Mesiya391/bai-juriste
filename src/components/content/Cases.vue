@@ -75,14 +75,12 @@
             <table class="centered highlight responsive-table" v-if="showElements">
                 <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Note</th>
+                    <th v-for="col in notesColumnNames" v-bind:key="col">{{ col }}</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td v-for="item in notes.dates" v-bind:key="item">{{ item }}</td>
-                    <td v-for="item in notes.notes" v-bind:key="item">{{ item }}</td>
+                <tr v-for="row in notesRows" v-bind:key="row">
+                    <td v-for="column in notesColumns" v-bind:key="column">{{row[column]}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -110,23 +108,14 @@
                     attorney: "",
                     caseID: ""
                 },
-                proceedings: {
-                    names : [],
-                    dates : [],
-                    cities: [],
-                    notes: []
-                },
-                notes: {
-                    names: [],
-                    dates: [],
-                    notes: []
-                },
                 termsRows: [],
                 proceedingsRows: [],
                 pleadingsRows: [],
+                notesRows: [],
                 termsColumnNames: ["Data", "Od", "Do", "Nazwa", "Miasto", "Notatka"],
                 proceedingsColumnNames: ["Data", "Nazwa", "Miasto", "Notatka"],
                 pleadingsColumnNames: ["Data", "Nazwa","Notatka"],
+                notesColumnNames: ["Data", "Nazwa", "Notatka"],
                 showElements: false
             }
         },
@@ -197,7 +186,7 @@
                 let user = firebase.auth().currentUser;
                 let userID = user.uid;
                 let selectedCase = this.selectedCase;
-                let notes = this.notes;
+                let notesRows = this.notesRows;
                 db.collection('cases').doc(userID).collection('userCases').doc(selectedCase)
                     .collection('Notes')
                     .get()
@@ -205,10 +194,12 @@
                         querySnapshot.forEach(function(doc) {
                             // doc.data() is never undefined for query doc snapshots
                             let data = doc.data()
-                            notes.names.push(data.name)
-                            notes.dates.push(data.date)
-                            notes.notes.push(data.note)
-                            console.log(notes.names);
+                            notesRows.push({
+                                date: data.date,
+                                name: data.name,
+                                note: data.note
+                            })
+                            console.log("");
                         });
                     })
             },
@@ -296,6 +287,12 @@
                     return [];
                 }
                 return Object.keys(this.pleadingsRows[0])
+            },
+            "notesColumns": function columns() {
+                if (this.notesRows.length == 0) {
+                    return [];
+                }
+                return Object.keys(this.notesRows[0])
             }
         },
         created: function() {
