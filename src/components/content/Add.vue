@@ -1,10 +1,5 @@
 <template>
     <div>
-        <router-link :to="{ name : 'AddCase'}">Add Case</router-link>
-        <router-link :to="{ name : 'AddPleading'}">Add Pleading</router-link>
-        <router-link :to="{ name : 'AddNote'}">Add Note</router-link>
-        <router-link :to="{ name : 'AddTerm'}">Add Term</router-link>
-        <router-link :to="{ name : 'AddProceeding'}">Add Proceeding</router-link>
         <div class="container">
             <label>Wybierz akcję</label>
             <select class="browser-default" @change="displayForm" v-model="action">
