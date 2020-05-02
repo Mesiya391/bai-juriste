@@ -1,15 +1,18 @@
 <template>
-    <div>
-        <h2>TUTAJ BEDA NARZEDZIA DODATKOWE: KALKULATOR TERMINOW, WALUT, ODSETEK</h2>
-    </div>
+  <div>
+    <CurrencyCalculator />
+  </div>
 </template>
 
 <script>
-    export default {
-        name : 'Tools',
-    }
+import CurrencyCalculator from "./CurrencyCalculator/CurrencyCalculator";
+
+export default {
+  name: "Tools",
+  components: {
+    CurrencyCalculator,
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
