@@ -1,7 +1,5 @@
 <template>
     <div>
-        <router-link :to="{ name : 'DeleteCase'}">Delete Case</router-link>
-        <router-link :to="{ name : 'DeleteCaseElement'}">Delete Case Element</router-link>
         <div class="container">
             <label>Wybierz akcję</label>
             <select class="browser-default" @change="displayForm" v-model="action">
