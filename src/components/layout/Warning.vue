@@ -31,7 +31,7 @@
                 termsList: [],
                 colTerms:[],
                 currentDate: null,
-                columnList: ["Nazwa", "Data", "Od", "Do", "Notatka"]
+                columnList: ["Nazwa", "Data", "Od", "Do", "Notatka", "Miasto"]
             }
         },
         computed: {
@@ -76,7 +76,15 @@
                             .then(function (querySnapshot) {
                                 querySnapshot.forEach(function (doc) {
                                     // doc.data() is never undefined for query doc snapshots
-                                    termsList.push(doc.data())
+                                    let data = doc.data()
+                                    termsList.push({
+                                        name: data.name,
+                                        date: data.date,
+                                        startTime: data.startTime,
+                                        endTime: data.endTime,
+                                        note: data.note,
+                                        city: data.city,
+                                    })
                                     console.log(doc.id, " => ", doc.data(), termsList);
                                 });
                             })
