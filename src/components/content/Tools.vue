@@ -1,15 +1,33 @@
 <template>
-    <div>
-        <h2>TUTAJ BEDA NARZEDZIA DODATKOWE: KALKULATOR TERMINOW, WALUT, ODSETEK</h2>
-    </div>
+  <div class="tools">
+    <CurrencyCalculator />
+    <InterestCalculator />
+    <ProceedingsCalendarImport />
+  </div>
 </template>
 
 <script>
-    export default {
-        name : 'Tools',
-    }
+import CurrencyCalculator from "./CurrencyCalculator/CurrencyCalculator";
+import InterestCalculator from "./InterestCalculator/InterestCalculator";
+import ProceedingsCalendarImport from "./ProceedingsCalendarImport/ProceedingsCalendarImport";
+
+export default {
+  name: "Tools",
+  components: {
+    CurrencyCalculator,
+    InterestCalculator,
+    ProceedingsCalendarImport,
+  },
+};
 </script>
 
 <style>
+.tools {
+  display: flex;
+  flex-direction: column;
+}
 
+.tools > * {
+  margin-bottom: 24px;
+}
 </style>
