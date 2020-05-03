@@ -17,7 +17,7 @@
                 </select>
             </div>
             <div class="field">
-                <label for="noteName">Nazwa pisma</label>
+                <label for="noteName">Nazwa wydarzenia</label>
                 <input type="text" name="noteName" v-model="newName" >
             </div>
             <div class="field">

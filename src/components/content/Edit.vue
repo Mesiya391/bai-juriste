@@ -8,12 +8,14 @@
                 <option  :value="'EditPleading'" >Edytuj pismo</option>
                 <option  :value="'EditProceeding'" >Edytuj wydarzenie</option>
                 <option  :value="'EditTerm'" >Edytuj termin</option>
+                <option  :value="'EditCaseInfo'" >Edytuj sprawę</option>
             </select>
         </div>
         <EditForm id="EditNote" hidden />
         <EditPleading id="EditPleading" hidden />
         <EditProceeding id="EditProceeding" hidden />
         <EditTerm id="EditTerm" hidden />
+        <EditCaseInfo id="EditCaseInfo" hidden />
     </div>
 </template>
 
@@ -22,13 +24,15 @@
     import EditPleading from "../edit-forms/EditPleading";
     import EditProceeding from "../edit-forms/EditProceeding";
     import EditTerm from "../edit-forms/EditTerm";
+    import EditCaseInfo from "../edit-forms/EditCaseInfo";
     export default {
         name: 'Edit',
         components: {
             EditForm,
             EditPleading,
             EditProceeding,
-            EditTerm
+            EditTerm,
+            EditCaseInfo
         },
 
         methods: {
@@ -42,6 +46,8 @@
                     document.getElementById('EditProceeding').hidden = false
                 }else if (this.action == 'EditTerm') {
                     document.getElementById('EditTerm').hidden = false
+                }else if (this.action == 'EditCaseInfo') {
+                    document.getElementById('EditCaseInfo').hidden = false
                 }
             },
             hideAllForms: function () {
@@ -49,6 +55,7 @@
                 document.getElementById('EditPleading').hidden = true
                 document.getElementById('EditProceeding').hidden = true
                 document.getElementById('EditTerm').hidden = true
+                document.getElementById('EditCaseInfo').hidden = true
             }
         }
     }

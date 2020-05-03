@@ -1,7 +1,7 @@
 <template>
     <div @submit.prevent="editCase" class="signup container">
         <form class="card-panel">
-            <h2 class="center deep-purple-text">Edytuj termin</h2>
+            <h2 class="center deep-purple-text">Edytuj sprawę</h2>
             <div class="field">
                 <label>Wybierz sprawę </label>
                 <select class="browser-default" v-model="caseDel" @change="createElementList">
@@ -10,39 +10,44 @@
                 </select>
             </div>
             <div class="field">
-                <label>Wybierz element </label>
-                <select class="browser-default" v-model="elementName" >
-                    <option value="elementName" disabled selected>Choose your option</option>
-                    <option v-for="item in elementList" :value="item" v-bind:key="item">{{item}}</option>
-                </select>
+                <label for="name">Nazwa sprawy</label>
+                <input type="text" name="name" v-model="newName">
             </div>
             <div class="field">
-                <label for="noteName">Nazwa terminu</label>
-                <input type="text" name="noteName" v-model="newName" >
+                <label for="client">Klient</label>
+                <input type="text" name="client" v-model="newClient">
             </div>
             <div class="field">
-                <label for="date">Data</label>
-                <input type="date" name="date" v-model="newDate" >
+                <label for="clientAddress">Adres klienta</label>
+                <input type="text" name="clientAddress" v-model="newClientAddress">
             </div>
             <div class="field">
-                <label for="startTime">Od</label>
-                <input type="time" name="startTime" v-model="newStartTime">
+                <label for="party">Strona przeciwna</label>
+                <input type="text" name="party" v-model="newParty">
             </div>
             <div class="field">
-                <label for="endTime">Do</label>
-                <input type="time" name="endTime" v-model="newEndTime">
+                <label for="partyAddress">Strona przeciwna adres</label>
+                <input type="text" name="partyAddress" v-model="newPartyAddress">
             </div>
             <div class="field">
-                <label for="note">Miasto</label>
-                <input type="text" name="note" v-model="newCity">
+                <label for="court">Sąd</label>
+                <input type="text" name="court" v-model="newCourt">
             </div>
             <div class="field">
-                <label for="note">Notatka</label>
-                <input type="text" name="note" v-model="newNote">
+                <label for="wps">Wartość przedmiotu sporu</label>
+                <input type="text" name="wps" v-model="newWps">
+            </div>
+            <div class="field">
+                <label for="attorney">Pełnomocnik strony przeciwnej</label>
+                <input type="text" name="attorney" v-model="newAttorney">
+            </div>
+            <div class="field">
+                <label for="caseID">Sygnatura sprawy</label>
+                <input type="text" name="caseID" v-model="newCaseID">
             </div>
             <p class="red-text center" v-if="feedback">{{feedback}}</p>
             <div class="field center">
-                <button class="btn deep-purple">Edytuj termin</button>
+                <button class="btn deep-purple">Edytuj sprawę</button>
             </div>
 
         </form>
@@ -61,16 +66,16 @@
             return{
                 caseDel: null,
                 caseList: [],
-                elementList: [],
-                chosenElement: 'Terms',
-                elementName: null,
                 feedback: null,
                 newName: null,
-                newDate: null,
-                newNote: null,
-                newCity: null,
-                newStartTime: null,
-                newEndTime: null
+                newClient: null,
+                newClientAddress: null,
+                newParty: null,
+                newPartyAddress: null,
+                newCourt: null,
+                newWps: null,
+                newCaseID: null,
+                newAttorney: null
             }
         },
         methods: {
@@ -79,78 +84,88 @@
                 let userID = user.uid
                 if (this.newName) {
                     db.collection('cases').doc(userID).collection('userCases').doc(this.caseDel)
-                        .collection(this.chosenElement).doc(this.elementName).update({
+                        .update({
                         name: this.newName,
                     })
                         .then(() => {
                             this.feedback = 'Element successfully edited';
                         })
                 }
-                if (this.newDate) {
+                if (this.newClient) {
                     db.collection('cases').doc(userID).collection('userCases').doc(this.caseDel)
-                        .collection(this.chosenElement).doc(this.elementName).update({
-                        date: this.newDate,
+                        .update({
+                        client: this.newClient,
                     })
                         .then(() => {
                             this.feedback = 'Element successfully edited';
                         })
                 }
-                if (this.newNote) {
+                if (this.newClientAddress) {
                     db.collection('cases').doc(userID).collection('userCases').doc(this.caseDel)
-                        .collection(this.chosenElement).doc(this.elementName).update({
-                        note: this.newNote,
+                        .update({
+                        clientAddress: this.newClientAddress,
                     })
                         .then(() => {
                             this.feedback = 'Element successfully edited';
                         })
                 }
-                if (this.newCity) {
+                if (this.newParty) {
                     db.collection('cases').doc(userID).collection('userCases').doc(this.caseDel)
-                        .collection(this.chosenElement).doc(this.elementName).update({
-                        city: this.newCity,
+                        .update({
+                        party: this.newParty,
                     })
                         .then(() => {
                             this.feedback = 'Element successfully edited';
                         })
                 }
-                if (this.newStartTime) {
+                if (this.newPartyAddress) {
                     db.collection('cases').doc(userID).collection('userCases').doc(this.caseDel)
-                        .collection(this.chosenElement).doc(this.elementName).update({
-                        startTime: this.newStartTime,
+                       .update({
+                        partyAddress: this.newPartyAddress,
                     })
                         .then(() => {
                             this.feedback = 'Element successfully edited';
                         })
                 }
-                if (this.newEndTime) {
+                if (this.newAttorney) {
                     db.collection('cases').doc(userID).collection('userCases').doc(this.caseDel)
-                        .collection(this.chosenElement).doc(this.elementName).update({
-                        endTime: this.newEndTime,
+                        .update({
+                        attorney: this.newAttorney,
+                    })
+                        .then(() => {
+                            this.feedback = 'Element successfully edited';
+                        })
+                }
+                if (this.newCourt) {
+                    db.collection('cases').doc(userID).collection('userCases').doc(this.caseDel)
+                        .update({
+                        court: this.newCourt,
+                    })
+                        .then(() => {
+                            this.feedback = 'Element successfully edited';
+                        })
+                }
+                if (this.newWps) {
+                    db.collection('cases').doc(userID).collection('userCases').doc(this.caseDel)
+                        .update({
+                        wps: this.newWps,
+                    })
+                        .then(() => {
+                            this.feedback = 'Element successfully edited';
+                        })
+                }
+                if (this.newCaseID) {
+                    db.collection('cases').doc(userID).collection('userCases').doc(this.caseDel)
+                        .update({
+                        caseID: this.newCaseID,
                     })
                         .then(() => {
                             this.feedback = 'Element successfully edited';
                         })
                 }
             },
-            createElementList: function () {
-                let elementList = this.elementList
-                let user = firebase.auth().currentUser;
-                let userID = user.uid
-                db.collection('cases').doc(userID).collection('userCases').doc(this.caseDel)
-                    .collection(this.chosenElement)
-                    .get()
-                    .then(function (querySnapshot) {
-                        querySnapshot.forEach(function (doc) {
-                            // doc.data() is never undefined for query doc snapshots
-                            elementList.push(doc.id)
-                            console.log(doc.id, " => ", doc.data(), elementList);
-                        });
-                    })
-                    .catch(function (error) {
-                        console.log("Error getting documents: ", error);
-                    });
+
             },
-        },
         created: function () {
             let caseList = this.caseList
             let user = firebase.auth().currentUser;
