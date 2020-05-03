@@ -9,7 +9,7 @@
                     <th v-for="col in columnList" v-bind:key="col"> {{ col }} </th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="warning-table-body">
                 <tr v-for="row in colTime" v-bind:key="row">
                     <td v-for="column in timeColumns" v-bind:key="column">{{row[column]}}</td>
                 </tr>
@@ -147,5 +147,9 @@
     }
     #warning1{
         background-color: red;
+    }
+
+    .warning-table-body {
+        margin-bottom: 48px;
     }
 </style>
