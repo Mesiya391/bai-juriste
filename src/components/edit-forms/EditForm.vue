@@ -11,7 +11,7 @@
             </div>
             <div class="field">
                 <label>Wybierz element </label>
-                <select class="browser-default" v-model="elementName" @change="setValues">
+                <select class="browser-default" v-model="elementName" >
                     <option value="elementName" disabled selected>Choose your option</option>
                     <option v-for="item in elementList" :value="item" v-bind:key="item">{{item}}</option>
                 </select>
