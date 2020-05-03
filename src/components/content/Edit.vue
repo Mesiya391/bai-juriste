@@ -7,11 +7,13 @@
                 <option  :value="'EditNote'" >Edytuj notatkę</option>
                 <option  :value="'EditPleading'" >Edytuj pismo</option>
                 <option  :value="'EditProceeding'" >Edytuj wydarzenie</option>
+                <option  :value="'EditTerm'" >Edytuj termin</option>
             </select>
         </div>
         <EditForm id="EditNote" hidden />
         <EditPleading id="EditPleading" hidden />
         <EditProceeding id="EditProceeding" hidden />
+        <EditTerm id="EditTerm" hidden />
     </div>
 </template>
 
@@ -19,12 +21,14 @@
     import EditForm from "../edit-forms/EditForm";
     import EditPleading from "../edit-forms/EditPleading";
     import EditProceeding from "../edit-forms/EditProceeding";
+    import EditTerm from "../edit-forms/EditTerm";
     export default {
         name: 'Edit',
         components: {
             EditForm,
             EditPleading,
-            EditProceeding
+            EditProceeding,
+            EditTerm
         },
 
         methods: {
@@ -36,12 +40,15 @@
                     document.getElementById('EditPleading').hidden = false
                 }else if (this.action == 'EditProceeding') {
                     document.getElementById('EditProceeding').hidden = false
+                }else if (this.action == 'EditTerm') {
+                    document.getElementById('EditTerm').hidden = false
                 }
             },
             hideAllForms: function () {
                 document.getElementById('EditNote').hidden = true
                 document.getElementById('EditPleading').hidden = true
                 document.getElementById('EditProceeding').hidden = true
+                document.getElementById('EditTerm').hidden = true
             }
         }
     }
