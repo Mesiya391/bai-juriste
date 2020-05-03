@@ -97,7 +97,7 @@ export default {
       this.resultAmount = "";
       axios
         .get(
-          `https://prime.exchangerate-api.com/v5/1b2586fee15e5c1bc0077381/${date}/${this.fromCurrencyCode}`
+          `https://prime.exchangerate-api.com/v5/c40f1bb05419363fdb4c8354/${date}/${this.fromCurrencyCode}`
         )
         .then((response) => {
           if (typeof response === "string") {
