@@ -1,5 +1,5 @@
 <template>
-    <div @submit.prevent="addNote" class="signup container">
+    <div @submit.prevent="addNote" class="AddCase container">
         <form class="card-panel">
             <h2 class="center deep-purple-text">Dodaj Notatkę</h2>
             <div class="field">

@@ -1,5 +1,5 @@
 <template>
-    <div @submit.prevent="addPleading" class="signup container">
+    <div @submit.prevent="addPleading" class="AddCase container">
         <form class="card-panel">
             <h2 class="center deep-purple-text">Dodaj Pismo</h2>
             <div class="field">

@@ -1,5 +1,5 @@
 <template>
-    <div @submit.prevent="editCase" class="signup container">
+    <div @submit.prevent="editCase" class="AddCase container">
         <form class="card-panel">
             <h2 class="center deep-purple-text">Edytuj termin</h2>
             <div class="field">

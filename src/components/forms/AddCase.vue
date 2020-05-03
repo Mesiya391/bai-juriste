@@ -1,7 +1,7 @@
 <template>
     <div @submit.prevent="createCase" class="AddCase container">
         <form class="card-panel">
-            <h2 class="center deep-purple-text">Add Case</h2>
+            <h2 class="center deep-purple-text">Dodaj sprawę</h2>
             <div class="field">
                 <label for="name">Nazwa sprawy</label>
                 <input type="text" name="name" v-model="name">
