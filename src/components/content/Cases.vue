@@ -10,21 +10,21 @@
         </div>
         <div class="container">
             <h3 v-if="showElements">Informacje ogólne:</h3>
-            <p v-if="showElements">Nazwa sprawy: {{ caseInfo.name }} </p>
-            <p v-if="showElements">Sąd: {{ caseInfo.court }}</p>
-            <p v-if="showElements">Wartość przedmiotu sporu: {{ caseInfo.wps }}</p>
-            <p v-if="showElements">Sygnatura sprawy: {{ caseInfo.caseID }}</p>
+            <p v-if="showElements"><b>Nazwa sprawy:</b> {{ caseInfo.name }} </p>
+            <p v-if="showElements"><b>Sąd:</b> {{ caseInfo.court }}</p>
+            <p v-if="showElements"><b>Wartość przedmiotu sporu:</b> {{ caseInfo.wps }}</p>
+            <p v-if="showElements"><b>Sygnatura sprawy:</b> {{ caseInfo.caseID }}</p>
         </div>
         <div class="container">
             <h3 v-if="showElements">Dane klienta: </h3>
-            <p v-if="showElements">Klient: {{ caseInfo.client }}</p>
-            <p v-if="showElements">Adres: {{ caseInfo.clientAddress }}</p>
+            <p v-if="showElements"><b>Klient:</b> {{ caseInfo.client }}</p>
+            <p v-if="showElements"><b>Adres:</b> {{ caseInfo.clientAddress }}</p>
         </div>
         <div class="container">
             <h3 v-if="showElements">Dane strony przeciwnej: </h3>
-            <p v-if="showElements">Nazwa: {{ caseInfo.party }}</p>
-            <p v-if="showElements">Adres: {{ caseInfo.partyAddress }}</p>
-            <p v-if="showElements">Pełnomocnik: {{ caseInfo.attorney }}</p>
+            <p v-if="showElements"><b>Nazwa:</b> {{ caseInfo.party }}</p>
+            <p v-if="showElements"><b>Adres:</b> {{ caseInfo.partyAddress }}</p>
+            <p v-if="showElements"><b>Pełnomocnik:</b> {{ caseInfo.attorney }}</p>
         </div>
         <div class="table container">
             <h3 v-if="showElements" @click="showTermTable">Terminy↓</h3>
