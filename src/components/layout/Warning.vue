@@ -119,9 +119,11 @@
                                     let g = colTerms[j].endTime.split(":")
                                     let h = g[0] + g[1]
                                     console.log(b, d, f, h)
-                                    if((parseInt(b) >= parseInt(f) && parseInt(b) <= parseInt(h)) || (parseInt(d) >= parseInt(f) && parseInt(d) <= parseInt(h))){
-                                        if(!colTime.includes(colTerms[i]) && colTerms[i].name != colTerms[j].name){
-                                            colTime.push(colTerms[i])
+                                    if(colTerms[i].date == colTerms[j].date) {
+                                        if ((parseInt(b) >= parseInt(f) && parseInt(b) <= parseInt(h)) || (parseInt(d) >= parseInt(f) && parseInt(d) <= parseInt(h))) {
+                                            if (!colTime.includes(colTerms[i]) && colTerms[i].name != colTerms[j].name) {
+                                                colTime.push(colTerms[i])
+                                            }
                                         }
                                     }
                                 }

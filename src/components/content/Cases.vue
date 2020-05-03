@@ -281,7 +281,7 @@
                     })
                     this.tableSorted = true;
                 }
-            }
+            },
         },
         computed: {
             "termsColumns": function columns() {
