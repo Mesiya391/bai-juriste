@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p id="warning1" class="center" @click="showColTerms">Masz {{colTime.length}} terminów w tym samym czasie (kliknij)</p>
+        <p v-if="colTime.length > 0" id="warning1" class="center" @click="showColTerms">Masz {{colTime.length}} terminów w tym samym czasie (kliknij)</p>
         <div class="table container">
             <h3 hidden>Kolidujące terminy:</h3>
             <table class="centered highlight responsive-table" id="warningTable" @dblclick="hideTable" hidden>

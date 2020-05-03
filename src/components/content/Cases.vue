@@ -27,7 +27,7 @@
             <p v-if="showElements">Pełnomocnik: {{ caseInfo.attorney }}</p>
         </div>
         <div class="table container">
-            <h3 v-if="showElements" @click="showTermTable">Terminy</h3>
+            <h3 v-if="showElements" @click="showTermTable">Terminy↓</h3>
             <table class="centered highlight responsive-table" v-if="showElements" id="termTable" @dblclick="hideTermTable" hidden>
                 <thead>
                 <tr>
@@ -42,7 +42,7 @@
             </table>
         </div>
         <div class="table container">
-            <h3 v-if="showElements" @click="showProceedingTable">Wydarzenia</h3>
+            <h3 v-if="showElements" @click="showProceedingTable">Wydarzenia↓</h3>
             <table class="centered highlight responsive-table" v-if="showElements" id="proceedingTable" @dblclick="hideProceedingTable" hidden>
                 <thead>
                 <tr>
@@ -57,7 +57,7 @@
             </table>
         </div>
         <div class="table container">
-            <h3 v-if="showElements" @click="showPleadingTable">Pisma procesowe</h3>
+            <h3 v-if="showElements" @click="showPleadingTable">Pisma procesowe↓</h3>
             <table class="centered highlight responsive-table" v-if="showElements" id="pleadingTable" @dblclick="hidePleadingTable" hidden>
                 <thead>
                 <tr>
@@ -72,7 +72,7 @@
             </table>
         </div>
         <div class="table container">
-            <h3 v-if="showElements" @click="showNoteTable">Notatki</h3>
+            <h3 v-if="showElements" @click="showNoteTable">Notatki↓</h3>
             <table class="centered highlight responsive-table" v-if="showElements" id="noteTable" @dblclick="hideNoteTable" hidden>
                 <thead>
                 <tr>
