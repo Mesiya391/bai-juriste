@@ -30,7 +30,7 @@
             </div>
             <p class="red-text center" v-if="feedback">{{feedback}}</p>
             <div class="field center">
-                <button class="btn deep-purple">Edytuj notatkę</button>
+                <button class="btn deep-purple">Edytuj pismo</button>
             </div>
 
         </form>
