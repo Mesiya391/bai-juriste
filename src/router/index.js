@@ -15,6 +15,7 @@ import Delete from "../components/content/Delete";
 import DeleteCase from "../components/delete-forms/DeleteCase";
 import DeleteCaseElement from "../components/delete-forms/DeleteCaseElement";
 import Warning from "../components/layout/Warning";
+import Edit from "../components/content/Edit";
 import firebase from "firebase";
 
 
@@ -132,6 +133,14 @@ const routes = [
     path: '/warning',
     name: 'Warning',
     component: Warning,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/edit',
+    name: 'Edit',
+    component: Edit,
     meta: {
       requiresAuth: true
     }

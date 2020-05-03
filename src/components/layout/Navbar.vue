@@ -8,6 +8,7 @@
                     <li v-if="!user"><router-link :to="{ name: 'Login' }">Log in</router-link></li>
                     <li v-if="user"><router-link :to="{ name: 'Cases' }">Cases</router-link></li>
                     <li v-if="user"><router-link :to="{ name: 'Add' }">Add</router-link></li>
+                    <li v-if="user"><router-link :to="{ name: 'Edit' }">Edit</router-link></li>
                     <li v-if="user"><router-link :to="{ name: 'Delete' }">Delete</router-link></li>
                     <li v-if="user"><router-link :to="{ name: 'Tools' }">Tools</router-link></li>
                     <li v-if="user"><a>{{ user.email }}</a></li>
