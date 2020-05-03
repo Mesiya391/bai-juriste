@@ -1,8 +1,8 @@
 <template>
     <div>
-        <p id="warning1" class="center" @click="showColTerms">Masz {{colTerms.length}} terminów w tym samym dniu(Kliknij)</p>
+        <p id="warning1" class="center" @click="showColTerms">Masz {{colTime.length}} terminów w tym samym czasie (kliknij)</p>
         <div class="table container">
-            <h3 hidden>Tego samego dnia</h3>
+            <h3 hidden>Kolidujące terminy:</h3>
             <table class="centered highlight responsive-table" id="warningTable" @dblclick="hideTable" hidden>
                 <thead>
                 <tr>
@@ -10,8 +10,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="row in colTerms" v-bind:key="row">
-                    <td v-for="column in termsColumns" v-bind:key="column">{{row[column]}}</td>
+                <tr v-for="row in colTime" v-bind:key="row">
+                    <td v-for="column in timeColumns" v-bind:key="column">{{row[column]}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -31,12 +31,16 @@
                 termsList: [],
                 colTerms:[],
                 currentDate: null,
-                columnList: ["Nazwa", "Data", "Od", "Do", "Notatka", "Miasto"]
+                columnList: ["Nazwa", "Data", "Od", "Do", "Notatka", "Miasto", "Sprawa"],
+                colTime: []
             }
         },
         computed: {
             "termsColumns": function columns() {
                 return Object.keys(this.colTerms[0])
+            },
+            "timeColumns": function columns() {
+                return Object.keys(this.colTime[0])
             },
         },
         methods:{
@@ -49,6 +53,7 @@
             }
         },
         created: function() {
+            let colTime = this.colTime
             let colTerms = this.colTerms
             let caseList = this.caseList
             let termsList = this.termsList
@@ -84,6 +89,7 @@
                                         endTime: data.endTime,
                                         note: data.note,
                                         city: data.city,
+                                        caseID: caseList[i]
                                     })
                                     console.log(doc.id, " => ", doc.data(), termsList);
                                 });
@@ -100,6 +106,27 @@
                                 }
                             }
                             console.log("colTerms", colTerms)
+                        })
+                        .then(function(){
+                            for(let i in colTerms){
+                                for(let j in colTerms){
+                                    let a = colTerms[i].startTime.split(":")
+                                    let b = a[0] + a[1]
+                                    let c = colTerms[i].endTime.split(":")
+                                    let d = c[0] + c[1]
+                                    let e = colTerms[j].startTime.split(":")
+                                    let f = e[0] + e[1]
+                                    let g = colTerms[j].endTime.split(":")
+                                    let h = g[0] + g[1]
+                                    console.log(b, d, f, h)
+                                    if((parseInt(b) >= parseInt(f) && parseInt(b) <= parseInt(h)) || (parseInt(d) >= parseInt(f) && parseInt(d) <= parseInt(h))){
+                                        if(!colTime.includes(colTerms[i]) && colTerms[i].name != colTerms[j].name){
+                                            colTime.push(colTerms[i])
+                                        }
+                                    }
+                                }
+                            }
+                            console.log(colTime)
                         })
                     }
                 })
