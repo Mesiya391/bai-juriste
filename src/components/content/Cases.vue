@@ -27,8 +27,8 @@
             <p v-if="showElements">Pełnomocnik: {{ caseInfo.attorney }}</p>
         </div>
         <div class="table container">
-            <h3 v-if="showElements">Terminy</h3>
-            <table class="centered highlight responsive-table" v-if="showElements">
+            <h3 v-if="showElements" @click="showTermTable">Terminy</h3>
+            <table class="centered highlight responsive-table" v-if="showElements" id="termTable" @dblclick="hideTermTable" hidden>
                 <thead>
                 <tr>
                     <th v-for="col in termsColumns" v-bind:key="col" @click="termSortTable(col, termsRows)"> {{ col }} </th>
@@ -42,8 +42,8 @@
             </table>
         </div>
         <div class="table container">
-            <h3 v-if="showElements">Wydarzenia</h3>
-            <table class="centered highlight responsive-table" v-if="showElements">
+            <h3 v-if="showElements" @click="showProceedingTable">Wydarzenia</h3>
+            <table class="centered highlight responsive-table" v-if="showElements" id="proceedingTable" @dblclick="hideProceedingTable" hidden>
                 <thead>
                 <tr>
                     <th v-for="col in proceedingsColumns" v-bind:key="col" @click="termSortTable(col, proceedingsRows)">{{ col }}</th>
@@ -57,8 +57,8 @@
             </table>
         </div>
         <div class="table container">
-            <h3 v-if="showElements">Pisma procesowe</h3>
-            <table class="centered highlight responsive-table" v-if="showElements">
+            <h3 v-if="showElements" @click="showPleadingTable">Pisma procesowe</h3>
+            <table class="centered highlight responsive-table" v-if="showElements" id="pleadingTable" @dblclick="hidePleadingTable" hidden>
                 <thead>
                 <tr>
                     <th v-for="col in pleadingsColumns" v-bind:key="col" @click="termSortTable(col, pleadingsRows)">{{ col }}</th>
@@ -72,8 +72,8 @@
             </table>
         </div>
         <div class="table container">
-            <h3 v-if="showElements">Notatki</h3>
-            <table class="centered highlight responsive-table" v-if="showElements">
+            <h3 v-if="showElements" @click="showNoteTable">Notatki</h3>
+            <table class="centered highlight responsive-table" v-if="showElements" id="noteTable" @dblclick="hideNoteTable" hidden>
                 <thead>
                 <tr>
                     <th v-for="col in notesColumns" v-bind:key="col" @click="termSortTable(col, notesRows)">{{ col }}</th>
@@ -282,6 +282,32 @@
                     this.tableSorted = true;
                 }
             },
+            showTermTable: function(){
+                document.getElementById('termTable').hidden = false
+            },
+            hideTermTable: function(){
+                document.getElementById('termTable').hidden = true
+            },
+            showProceedingTable: function(){
+                document.getElementById('proceedingTable').hidden = false
+            },
+            hideProceedingTable: function(){
+                document.getElementById('proceedingTable').hidden = true
+            },
+            showPleadingTable: function(){
+                document.getElementById('pleadingTable').hidden = false
+            },
+            hidePleadingTable: function(){
+                document.getElementById('pleadingTable').hidden = true
+            },
+            showNoteTable: function(){
+                document.getElementById('noteTable').hidden = false
+            },
+            hideNoteTable: function(){
+                document.getElementById('noteTable').hidden = true
+            },
+
+
         },
         computed: {
             "termsColumns": function columns() {
