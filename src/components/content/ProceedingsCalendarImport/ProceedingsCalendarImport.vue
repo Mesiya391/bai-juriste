@@ -22,6 +22,7 @@
         </button>
       </div>
       <ul v-if="isUserSignedIn" class="cases">
+        <span class="import-info">Click case to import proceedings:</span>
         <li v-for="caseName in cases" :key="caseName">
           <button
             class="btn deep-purple"
@@ -183,6 +184,11 @@ export default {
 
 .proceedings-calendar-impoty {
   margin-top: 60px;
+}
+
+.import-info {
+  margin-bottom: 16px;
+  margin-top: 16px;
 }
 
 .cases {
