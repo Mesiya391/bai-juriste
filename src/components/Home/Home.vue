@@ -1,10 +1,13 @@
 <template>
   <div class="title">
-    <h2 class="center">Home Page</h2>
+    <Warning />
+    <h3 class="center">Witaj w Juriste.pro</h3>
+
+    <h3 class="center">Twój Google Calendar:</h3>
     <div class="home-components">
       <ProceedingsCalendarImport />
 
-      <Warning />
+
     </div>
   </div>
 </template>
