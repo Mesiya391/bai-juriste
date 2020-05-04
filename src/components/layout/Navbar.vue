@@ -6,9 +6,11 @@
                 <ul class="right">
                     <li v-if="!user"><router-link :to="{ name: 'Signup' }">Sign up</router-link></li>
                     <li v-if="!user"><router-link :to="{ name: 'Login' }">Log in</router-link></li>
-                    <li v-if="user"><router-link :to="{ name: 'Cases' }">Cases</router-link></li>
-                    <li v-if="user"><router-link :to="{ name: 'Add' }">Add</router-link></li>
-                    <li v-if="user"><router-link :to="{ name: 'Tools' }">Tools</router-link></li>
+                    <li v-if="user"><router-link :to="{ name: 'Cases' }">Sprawy</router-link></li>
+                    <li v-if="user"><router-link :to="{ name: 'Add' }">Dodaj</router-link></li>
+                    <li v-if="user"><router-link :to="{ name: 'Edit' }">Edytuj</router-link></li>
+                    <li v-if="user"><router-link :to="{ name: 'Delete' }">Usuń</router-link></li>
+                    <li v-if="user"><router-link :to="{ name: 'Tools' }">Narzędzia</router-link></li>
                     <li v-if="user"><a>{{ user.email }}</a></li>
                     <li v-if="user"><a @click="logout">Log out</a></li>
                 </ul>

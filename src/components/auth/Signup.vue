@@ -11,9 +11,8 @@
                 <input type="password" name="password" v-model="password">
             </div>
             <div class="field">
-                <label for="alias">Alias</label>
+                <label for="alias">Nazwa użytkownika</label>
                 <input type="text" name="alias" v-model="alias">
-
             </div>
             <p class="red-text center" v-if="feedback">{{feedback}}</p>
             <div class="field center">
@@ -53,7 +52,6 @@
                                 .then(cred =>{
                                     ref.set({
                                         alias:this.alias,
-                                        geolocation:null,
                                         user_id: cred.user.uid
                                     })
                                 })
